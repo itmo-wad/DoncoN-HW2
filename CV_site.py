@@ -4,15 +4,17 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 
 app.config['MONGO_DBNAME'] = 'DoncoN_2_HW_DB'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/DoncoN_2_HW_DB'
+app.config['MONGO_URI'] = 'mongodb://192.168.0.178:27017/DoncoN_2_HW_DB'
 
 mongo = PyMongo(app)
 
+def is_logged():
+    return 'username' in session
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        return redirect("/profile", code=302)
+    if is_logged():
+        return redirect(url_for('profile'))
     return render_template('log-in.html')
 
 
@@ -30,7 +32,14 @@ def login():
 
 @app.route('/profile')
 def profile():
+    if not is_logged():
+        return redirect(url_for('login'))
     return render_template('CV_Nam.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
