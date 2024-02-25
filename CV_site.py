@@ -18,17 +18,19 @@ def index():
     return render_template('log-in.html')
 
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    users = mongo.db.users
-    login_user = users.find_one({'username': request.form['username']})
+    if request.method == 'POST':
+        users = mongo.db.users
+        login_user = users.find_one({'username': request.form['username']})
 
-    if login_user:
-        if request.form['pass'].encode('utf-8') == login_user['password'].encode('utf-8'):
-            session['username'] = request.form['username']
-            return redirect(url_for('index'))
-    return "Invalid username or password"
-
+        if login_user:
+            if request.form['pass'].encode('utf-8') == login_user['password'].encode('utf-8'):
+                session['username'] = request.form['username']
+                return redirect(url_for('index'))
+        return "Invalid username or password"
+    else:
+        return render_template('log-in.html')
 
 @app.route('/profile')
 def profile():
