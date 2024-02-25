@@ -1,0 +1,58 @@
+:root {
+    --primary-color: #2ad4eb;
+    --second-color: #b759ff;
+    --white-color: #fbfbfb;
+}
+
+body {
+    color: #fff;
+    background-color: --white-color;
+    font-family: "Segoe UI", sans-serif;
+    background-image: linear-gradient(to top,
+    var(--second-color),
+    var(--primary-color));
+}
+
+h1 {
+    font-size:3rem;
+    font-weight:400;
+    line-height:1.5;
+    text-align: center;
+    text-transform: uppercase;
+    color: --white-color;
+}
+
+h2 {
+    font-size:2.5rem;
+    font-weight:400;
+    line-height:1.5;
+    text-align: center;
+    text-transform: uppercase;
+    color: --white-color;
+}
+
+p {
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 400;
+}
+
+ul {
+    font-size: 1.50rem;
+    font-weight: 300;
+    text-align: center;
+    list-style-type: disc;
+}
+ul li{
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    margin: 10px;
+}
+
+.date {
+    color: --white-color;
+    font-size: 1.50rem;
+    font-weight: 300;
+    margin: 25px;
+}
